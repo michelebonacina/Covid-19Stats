@@ -2,7 +2,7 @@
 <footer class="py-4 bg-light mt-auto">
     <div class="container-fluid">
         <div class="d-flex align-items-center justify-content-between small">
-            <div class="text-muted">Copyright &copy; Michele Bonacina 2020</div>
+            <div class="text-muted">Created by Michele Bonacina 2020</div>
             <div>
                 <a href="https://github.com/pcm-dpc/COVID-19" target="_blank">Fonte Dati Protezione Civile</a>
                 &middot;
