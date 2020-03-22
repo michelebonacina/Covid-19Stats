@@ -12,7 +12,7 @@
         data: {
             labels: params.labels,
             datasets: [{
-                    label: "Revenue",
+                    label: "Totale",
                     backgroundColor: params.backgroundColor,
                     borderColor: params.backgroundColor,
                     data: params.values,
