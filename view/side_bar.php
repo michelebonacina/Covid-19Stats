@@ -48,7 +48,11 @@
         </div>
     </div>
     <div class="sb-sidenav-footer">
-        <div class="small">Logged in as:</div>
-        Start Bootstrap
+        <div class="small">Aggiornamento dati:</div>
+        <?php
+            // TODO
+            $updated_date="gg/mm/aaaa hh:mm";
+            echo $updated_date;
+        ?>
     </div>
 </nav>
