@@ -1,13 +1,13 @@
 <?php
 require_once("controller/global_data.php");
 
-$globalData = GlobalDataController::loadGlobalData();
-
+$globalHistoryData = GlobalDataController::getInstance()->loadGlobalHistoryData();
+$globalData= $globalHistoryData[0];
 ?>
 <!-- main -->
 <main>
     <div class="container-fluid">
-        <h1 class="mt-4">Situazione Nazionale</h1>
+        <h1 class="mt-4">Situazione Nazionale giorno</h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item active">Andamento Nazionale al <?= date('d-m-Y H:i', $globalData->date) ?></li>
         </ol>
