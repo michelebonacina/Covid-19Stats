@@ -1,7 +1,7 @@
 <?php
 require_once("controller/global_data.php");
 
-$globalHistoryData = GlobalDataController::getInstance()->loadGlobalHistoryData();
+$globalHistoryData = GlobalDataController::getGlobalHistoryData();
 $globalData= $globalHistoryData[0];
 ?>
 <!-- main -->

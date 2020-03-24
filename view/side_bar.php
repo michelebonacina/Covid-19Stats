@@ -22,7 +22,7 @@
         <div class="small">Aggiornamento dati:</div>
         <?php
         require_once("controller/global_data.php");
-        $globalData = GlobalDataController::getInstance()->loadGlobalData();
+        $globalData = GlobalDataController::getGlobalData();
         echo date('d-m-Y H:i', $globalData->date);
         ?>
     </div>
