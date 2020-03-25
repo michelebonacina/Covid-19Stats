@@ -10,10 +10,22 @@ require_once 'model/global_data.php';
  */
 class GlobalDataController {
 
-    private static function checkNewData($globalData) {
+    /**
+     * Check if the global history data list is updated.
+     * Assumed that the global data passed is the last version, checks if its date is 
+     * the same as the max date in global history data list. 
+     * If yes is updated and all is ok.
+     * Otherwise is outdated and load the online history list.
+     * @param GlobalData $globalData 
+     */
+    private static function checkNewData(GlobalData $globalData) {
         // TODO
     }
 
+    /**
+     * Load global data from online sources.
+     * @return global data loaded
+     */
     private static function loadGlobalData() {
         // load row data
         $url = ConfigurationController::$globalDataURL;
@@ -38,6 +50,10 @@ class GlobalDataController {
         return $globalData;
     }
 
+    /**
+     * Load global history data from online sources.
+     * @return loaded array of global history data 
+     */
     private static function loadGlobalHistoryData() {
         // load row data
         $url = ConfigurationController::$globalDataHistoryURL;
@@ -66,9 +82,14 @@ class GlobalDataController {
         return $globalHistoryData;
     }
 
-    public static function getGlobalData($forceReload = false) {
+    /**
+     * Gets global data.
+     * If present returns the cached version, otherwise loads and returns it.
+     * @param bool $forceReload force reload online version overwriting the cached
+     * @return GlobalData global data
+     */
+    public static function getGlobalData(bool $forceReload = false) {
         if ($forceReload || !isset($_SESSION[__CLASS__ . '-globalData'])) {
-            echo("RELOAD");
             $globalData = self::loadGlobalData();
             // check new data
             self::checkNewData($globalData);
@@ -77,12 +98,25 @@ class GlobalDataController {
         return unserialize(base64_decode($_SESSION[__CLASS__ . '-globalData']));
     }
 
+    /**
+     * Gets global history data list.
+     * If present returns the cached version, otherwise loads and returns it.
+     * @return GlobalData array of global history data
+     */
     public static function getGlobalHistoryData() {
         if (!isset($_SESSION[__CLASS__ . '-globalHistoryData'])) {
             echo("RELOAD HISTORY");
             $_SESSION[__CLASS__ . '-globalHistoryData'] = base64_encode(serialize(self::loadGlobalHistoryData()));
         }
         return unserialize(base64_decode($_SESSION[__CLASS__ . '-globalHistoryData']));
+    }
+    
+    /**
+     * 
+     */
+    public static function getGlobalHistoryDates(){
+        // get global history data
+        
     }
 
 }
