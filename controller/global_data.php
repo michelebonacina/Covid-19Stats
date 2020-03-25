@@ -105,18 +105,36 @@ class GlobalDataController {
      */
     public static function getGlobalHistoryData() {
         if (!isset($_SESSION[__CLASS__ . '-globalHistoryData'])) {
-            echo("RELOAD HISTORY");
             $_SESSION[__CLASS__ . '-globalHistoryData'] = base64_encode(serialize(self::loadGlobalHistoryData()));
         }
         return unserialize(base64_decode($_SESSION[__CLASS__ . '-globalHistoryData']));
     }
-    
+
     /**
-     * 
+     * List dates from local history data.
+     * @return array of dates
      */
-    public static function getGlobalHistoryDates(){
+    public static function getGlobalHistoryDates() {
         // get global history data
-        
+        $globalHistoryData = self::getGlobalHistoryData();
+        // get date list
+        $dateList = [];
+        foreach ($globalHistoryData as $globalData) {
+            array_push($dateList, $globalData->date);
+        }
+        // return date list
+        return $dateList;
+    }
+
+    public static function getGlobalDataByDate($date) {
+        $globalHistoryData = self::getGlobalHistoryData();
+        $toReturn = null;
+        foreach ($globalHistoryData as $globalData) {
+            if ($globalData->isSameDay($date)) {
+                $toReturn = $globalData;
+            }
+        }
+        return $toReturn;
     }
 
 }

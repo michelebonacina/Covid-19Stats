@@ -10,7 +10,7 @@
             <div class="sb-sidenav-menu-heading">Nazionale</div>
             <a class="nav-link" href="index.php?page=nation">
                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                Riepilogo
+                Giornaliero
             </a>
         </div>
     </div>

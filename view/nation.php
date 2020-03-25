@@ -1,54 +1,83 @@
 <?php
-require_once("controller/global_data.php");
+require_once('controller/global_data.php');
 
-$globalHistoryData = GlobalDataController::getGlobalHistoryData();
-$globalData= $globalHistoryData[0];
+$url = $_SERVER['PHP_SELF'] . '?page=nation';
+$dateList = GlobalDataController::getGlobalHistoryDates();
+$date = isset($_GET['date']) ? $_GET['date'] : $dateList[sizeof($dateList) - 1];
+$globalData = GlobalDataController::getGlobalDataByDate($date);
 ?>
 <!-- main -->
 <main>
     <div class="container-fluid">
-        <h1 class="mt-4">Situazione Nazionale giorno</h1>
+        <h1 class="mt-4">Situazione Nazionale giorno <?= date('d-m-Y', $date) ?></h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item active">Andamento Nazionale al <?= date('d-m-Y H:i', $globalData->date) ?></li>
         </ol>
         <div class="row">
-            <div class="col-xl-3 col-md-6">
-                <div class="card bg-primary text-white mb-4">
-                    <div class="card-body">Casi Totali</div>
-                    <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="text-white stretched-link" href="#"><?= $globalData->totalCases ?></a>
-                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+            <div class="col-md-5">
+                <div id="globalCalendar" class="vanilla-calendar"></div>
+                <script>
+                    let myCalendar = new VanillaCalendar({
+                        selector: "#globalCalendar",
+                        months: ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"],
+                        availableDates: [
+                        <?php
+                        foreach ($dateList as $date) {
+                            echo('{date: "' . date('Y-m-d', $date) . '"},');
+                        }
+                        ?>
+                        ],
+                        datesFilter: true,
+                        onSelect: (data, element) => {
+                            console.log(data.data.date);
+                            window.location.href = '<?= $url ?>&date=' + new Date(data.data.date).getTime() / 1000;
+                        }
+                    })
+                </script>
+            </div>
+            <div class="col-md-7">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card bg-primary text-white mb-4">
+                            <div class="card-body">Casi Totali</div>
+                            <div class="card-footer d-flex align-items-center justify-content-between">
+                                <a class="text-white stretched-link" href="#"><?= $globalData->totalCases ?></a>
+                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card bg-warning text-white mb-4">
+                            <div class="card-body">Totale Positivi</div>
+                            <div class="card-footer d-flex align-items-center justify-content-between">
+                                <a class="text-white stretched-link" href="#"><?= $globalData->totalActualPositive ?></a>
+                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card bg-success text-white mb-4">
+                            <div class="card-body">Dimessi Guariti</div>
+                            <div class="card-footer d-flex align-items-center justify-content-between">
+                                <a class="text-white stretched-link" href="#"><?= $globalData->dischargedHealed ?></a>
+                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card bg-danger text-white mb-4">
+                            <div class="card-body">Deceduti</div>
+                            <div class="card-footer d-flex align-items-center justify-content-between">
+                                <a class="text-white stretched-link" href="#"><?= $globalData->deceased ?></a>
+                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-md-6">
-                <div class="card bg-warning text-white mb-4">
-                    <div class="card-body">Totale Positivi</div>
-                    <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="text-white stretched-link" href="#"><?= $globalData->totalActualPositive ?></a>
-                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-                <div class="card bg-success text-white mb-4">
-                    <div class="card-body">Dimessi Guariti</div>
-                    <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="text-white stretched-link" href="#"><?= $globalData->dischargedHealed ?></a>
-                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-                <div class="card bg-danger text-white mb-4">
-                    <div class="card-body">Deceduti</div>
-                    <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="text-white stretched-link" href="#"><?= $globalData->deceased ?></a>
-                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </div>  
         <div class="row">
             <div class="col-xl-6">
                 <div class="card mb-4">
