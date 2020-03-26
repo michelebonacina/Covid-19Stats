@@ -5,6 +5,12 @@ $url = $_SERVER['PHP_SELF'] . '?page=nation';
 $dateList = GlobalDataController::getGlobalHistoryDates();
 $date = isset($_GET['date']) ? $_GET['date'] : $dateList[sizeof($dateList) - 1];
 $globalData = GlobalDataController::getGlobalDataByDate($date);
+$datePrevious= $date - 60 * 60 * 24;
+$globalDataPrevious = GlobalDataController::getGlobalDataByDate($datePrevious);
+if (is_null($globalDataPrevious)) {
+    $globalDataPrevious = $globalData;
+}
+
 ?>
 <!-- main -->
 <main>
@@ -45,7 +51,7 @@ foreach ($dateList as $date) {
                             <div class="card bg-primary text-white mb-4">
                                 <div class="card-body">Casi Totali</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <?= $globalData->totalCases ?>
+                                    <?= $globalData->totalCases ?> (<?= $globalData->totalCases - $globalDataPrevious->totalCases >= 0 ? '+' : '-' ?><?= $globalData->totalCases - $globalDataPrevious->totalCases ?>)
                                 </div>
                             </div>
                         </div>
@@ -53,7 +59,7 @@ foreach ($dateList as $date) {
                             <div class="card bg-warning text-white mb-4">
                                 <div class="card-body">Totale Positivi</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <?= $globalData->totalActualPositive ?>
+                                    <?= $globalData->totalActualPositive ?> (<?= $globalData->totalActualPositive - $globalDataPrevious->totalActualPositive >= 0 ? '+' :  '-' ?><?= $globalData->totalActualPositive - $globalDataPrevious->totalActualPositive ?>)
                                 </div>
                             </div>
                         </div>
@@ -63,7 +69,7 @@ foreach ($dateList as $date) {
                             <div class="card bg-success text-white mb-4">
                                 <div class="card-body">Dimessi Guariti</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <?= $globalData->dischargedHealed ?>
+                                    <?= $globalData->dischargedHealed ?> (<?= $globalData->dischargedHealed - $globalDataPrevious->dischargedHealed >= 0 ? '+' : '-' ?><?= $globalData->dischargedHealed - $globalDataPrevious->dischargedHealed ?>)
                                 </div>
                             </div>
                         </div>
@@ -71,7 +77,7 @@ foreach ($dateList as $date) {
                             <div class="card bg-danger text-white mb-4">
                                 <div class="card-body">Deceduti</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <?= $globalData->deceased ?>
+                                    <?= $globalData->deceased ?> (<?= $globalData->deceased - $globalDataPrevious->deceased >= 0 ? '+' :'-' ?><?= $globalData->deceased - $globalDataPrevious->deceased ?>)
                                 </div>
                             </div>
                         </div>
@@ -91,6 +97,16 @@ foreach ($dateList as $date) {
                     <div class="card-header"><i class="fas fa-chart-bar mr-1"></i>Situazione Positivi</div>
                     <div class="card-body"><canvas id="globalBar" width="100%" height="40"></canvas></div>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="card mb-4">
+                    <div class="card-header"><i class="fas fa-chart-pie mr-1"></i>Tamponi</div>
+                    <div class="card-body"><canvas id="swabsPie" width="100%" height="40"></canvas></div>
+                </div>
+            </div>
+            <div class="col-xl-6">
             </div>
         </div>
     </div>
@@ -114,5 +130,13 @@ foreach ($dateList as $date) {
     ];
     include 'assets/chart_bar.php';
     ?>
-
+    <?php
+    $params = [
+        'elementId' => "swabsPie",
+        'labels' => ['Tamponi Positivi', 'Tamponi Negativi'],
+        'values' => [$globalData->totalCases, $globalData->swabs - $globalData->totalCases],
+        'backgroundColor' => ['#ffc107', '#28a745']
+    ];
+    include 'assets/chart_pie.php';
+    ?>
 </main>

@@ -58,6 +58,16 @@ $globalData = GlobalDataController::getGlobalData(true);
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="card mb-4">
+                    <div class="card-header"><i class="fas fa-chart-pie mr-1"></i>Tamponi</div>
+                    <div class="card-body"><canvas id="swabsPie" width="100%" height="40"></canvas></div>
+                </div>
+            </div>
+            <div class="col-xl-6">
+            </div>
+        </div>
     </div>
     <!-- charts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
@@ -79,5 +89,13 @@ $globalData = GlobalDataController::getGlobalData(true);
     ];
     include 'assets/chart_bar.php';
     ?>
-
+    <?php
+    $params = [
+        'elementId' => "swabsPie",
+        'labels' => ['Tamponi Positivi', 'Tamponi Negativi'],
+        'values' => [$globalData->totalCases, $globalData->swabs - $globalData->totalCases],
+        'backgroundColor' => ['#ffc107', '#28a745']
+    ];
+    include 'assets/chart_pie.php';
+    ?>
 </main>
