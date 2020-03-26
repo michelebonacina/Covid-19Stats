@@ -12,6 +12,10 @@
                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                 Giornaliero
             </a>
+            <a class="nav-link" href="index.php?page=nationtrend">
+                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                Andamento
+            </a>
         </div>
     </div>
     <div class="sb-sidenav-footer">
