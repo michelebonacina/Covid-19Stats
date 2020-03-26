@@ -9,10 +9,10 @@
         <meta name="author" content="Michele Bonacina">
         <title>COVID-19 Andamento Italia</title>
         <!-- Bootstrap core CSS -->
-        <link href="css/sbadmin.bootstrap.css" rel="stylesheet">
-        <link href="css/style.css" rel="stylesheet">
-        <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+        <link rel="stylesheet" href="css/sbadmin.bootstrap.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" crossorigin="anonymous" />
         <link rel="stylesheet" href="css/vanilla-calendar-min.css">
+        <link rel="stylesheet" href="css/style.css">
         <script src="js/vanilla-calendar-min.js"></script>    
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous">
         </script>
