@@ -1,8 +1,7 @@
 <?php
 require_once("controller/global_data.php");
 
-$globalData = GlobalDataController::loadGlobalData();
-
+$globalData = GlobalDataController::getGlobalData(true);
 ?>
 <!-- main -->
 <main>
@@ -59,28 +58,26 @@ $globalData = GlobalDataController::loadGlobalData();
                 </div>
             </div>
         </div>
-        
     </div>
-   <!-- charts -->
+    <!-- charts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
     <?php
-        $params = [
-            'elementId' => "globalPie",
-            'labels' => ['Totale Positivi', 'Dimessi Guariti', 'Deceduti'],
-            'values' => [$globalData->totalActualPositive, $globalData->dischargedHealed, $globalData->deceased],
-            'backgroundColor' => ['#ffc107', '#28a745', '#dc3545']
-                
-        ];
-        include 'assets/chart_pie.php';
+    $params = [
+        'elementId' => "globalPie",
+        'labels' => ['Totale Positivi', 'Dimessi Guariti', 'Deceduti'],
+        'values' => [$globalData->totalActualPositive, $globalData->dischargedHealed, $globalData->deceased],
+        'backgroundColor' => ['#ffc107', '#28a745', '#dc3545']
+    ];
+    include 'assets/chart_pie.php';
     ?>
     <?php
-        $params = [
-            'elementId' => "globalBar",
-            'labels' => ['Ricoverati Sintomatici', 'Terapia Intensiva', 'Isolamento Domiciliare'],
-            'values' => [$globalData->synptomaticRecoverd, $globalData->intensiveCare, $globalData->homeIsolation],
-            'backgroundColor' => '#ffc107'
-        ];
-        include 'assets/chart_bar.php';
+    $params = [
+        'elementId' => "globalBar",
+        'labels' => ['Ricoverati Sintomatici', 'Terapia Intensiva', 'Isolamento Domiciliare'],
+        'values' => [$globalData->synptomaticRecoverd, $globalData->intensiveCare, $globalData->homeIsolation],
+        'backgroundColor' => '#ffc107'
+    ];
+    include 'assets/chart_bar.php';
     ?>
-    
+
 </main>

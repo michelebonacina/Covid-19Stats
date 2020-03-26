@@ -7,13 +7,18 @@
                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                 Situazione
             </a>
+            <div class="sb-sidenav-menu-heading">Nazionale</div>
+            <a class="nav-link" href="index.php?page=nation">
+                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                Giornaliero
+            </a>
         </div>
     </div>
     <div class="sb-sidenav-footer">
         <div class="small">Aggiornamento dati:</div>
         <?php
         require_once("controller/global_data.php");
-        $globalData = GlobalDataController::loadGlobalData();
+        $globalData = GlobalDataController::getGlobalData();
         echo date('d-m-Y H:i', $globalData->date);
         ?>
     </div>
