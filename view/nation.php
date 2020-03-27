@@ -2,7 +2,7 @@
 require_once('controller/global_data.php');
 
 $url = $_SERVER['PHP_SELF'] . '?page=nation';
-$dateList = GlobalDataController::getGlobalHistoryDates();
+$dateList = GlobalDataController::getGlobalHistoryValues('date');
 $date = isset($_GET['date']) ? $_GET['date'] : $dateList[sizeof($dateList) - 1];
 $globalData = GlobalDataController::getGlobalDataByDate($date);
 $datePrevious= $date - 60 * 60 * 24;
@@ -86,27 +86,23 @@ foreach ($dateList as $date) {
             </div>
         </div>  
         <div class="row">
-            <div class="col-xl-6">
+            <div class="col-xl-4">
                 <div class="card mb-4">
                     <div class="card-header"><i class="fas fa-chart-pie mr-1"></i>Situazione Globale</div>
-                    <div class="card-body"><canvas id="globalPie" width="100%" height="40"></canvas></div>
+                    <div class="card-body"><canvas id="globalPie" width="100%" height="80"></canvas></div>
                 </div>
             </div>
-            <div class="col-xl-6">
+            <div class="col-xl-4">
                 <div class="card mb-4">
-                    <div class="card-header"><i class="fas fa-chart-bar mr-1"></i>Situazione Positivi</div>
-                    <div class="card-body"><canvas id="globalBar" width="100%" height="40"></canvas></div>
+                    <div class="card-header"><i class="fas fa-chart-bar mr-1"></i>Situazione Globale Positivi</div>
+                    <div class="card-body"><canvas id="globalBar" width="100%" height="80"></canvas></div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-xl-6">
+            <div class="col-xl-4">
                 <div class="card mb-4">
-                    <div class="card-header"><i class="fas fa-chart-pie mr-1"></i>Tamponi</div>
-                    <div class="card-body"><canvas id="swabsPie" width="100%" height="40"></canvas></div>
+                    <div class="card-header"><i class="fas fa-chart-pie mr-1"></i>Globale Tamponi</div>
+                    <div class="card-body"><canvas id="swabsPie" width="100%" height="80"></canvas></div>
                 </div>
-            </div>
-            <div class="col-xl-6">
             </div>
         </div>
     </div>

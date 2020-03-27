@@ -114,13 +114,13 @@ class GlobalDataController {
      * List dates from local history data.
      * @return array of dates
      */
-    public static function getGlobalHistoryDates() {
+    public static function getGlobalHistoryValues($property) {
         // get global history data
         $globalHistoryData = self::getGlobalHistoryData();
         // get date list
         $dateList = [];
         foreach ($globalHistoryData as $globalData) {
-            array_push($dateList, $globalData->date);
+            array_push($dateList, $globalData->{$property});
         }
         // return date list
         return $dateList;

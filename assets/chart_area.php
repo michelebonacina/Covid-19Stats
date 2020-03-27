@@ -9,20 +9,20 @@
     var myLineChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: Object.keys(params.data),
+            labels: params.labels,
             datasets: [{
                     label: "Sessions",
                     lineTension: 0.3,
-                    backgroundColor: "rgba(2,117,216,0.2)",
-                    borderColor: "rgba(2,117,216,1)",
+                    backgroundColor: params.backgroundColor,
+                    borderColor: params.lineColor,
                     pointRadius: 5,
-                    pointBackgroundColor: "rgba(2,117,216,1)",
+                    pointBackgroundColor: params.lineColor,
                     pointBorderColor: "rgba(255,255,255,0.8)",
                     pointHoverRadius: 5,
-                    pointHoverBackgroundColor: "rgba(2,117,216,1)",
+                    pointHoverBackgroundColor: params.lineColor,
                     pointHitRadius: 50,
                     pointBorderWidth: 2,
-                    data: Object.values(params.data),
+                    data: params.values,
                 }],
         },
         options: {
@@ -41,7 +41,7 @@
                 yAxes: [{
                         ticks: {
                             min: 0,
-                            max: 40000,
+                            max: Math.max(...params.values),
                             maxTicksLimit: 5
                         },
                         gridLines: {

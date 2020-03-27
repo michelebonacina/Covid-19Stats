@@ -4,16 +4,16 @@
         <div class="nav">
             <div class="sb-sidenav-menu-heading">Globale</div>
             <a class="nav-link" href="index.php">
-                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                <div class="sb-nav-link-icon"><i class="fas fa-notes-medical"></i></div>
                 Situazione
             </a>
             <div class="sb-sidenav-menu-heading">Nazionale</div>
             <a class="nav-link" href="index.php?page=nation">
-                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                <div class="sb-nav-link-icon"><i class="fas fa-calendar-day"></i></div>
                 Giornaliero
             </a>
             <a class="nav-link" href="index.php?page=nationtrend">
-                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                <div class="sb-nav-link-icon"><i class="fas fa-chart-line"></i></div>
                 Andamento
             </a>
         </div>
